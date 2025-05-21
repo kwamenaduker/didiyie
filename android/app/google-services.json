@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "460661761537",
+    "project_id": "didi-yie",
+    "storage_bucket": "didi-yie.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460661761537:android:4b9e827af492c9f8778200",
+        "android_client_info": {
+          "package_name": "com.capstone.didiyie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSoljkqFHHK1AXx2cD_EsWL1_nLHGBAcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

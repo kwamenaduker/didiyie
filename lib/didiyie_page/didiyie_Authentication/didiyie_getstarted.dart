@@ -1,0 +1,373 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:didiyie/didiyie_controller/auth_controller.dart';
+import 'package:didiyie/didiyie_page/didiyie_Authentication/didiyie_login.dart';
+import 'package:didiyie/didiyie_page/didiyie_Authentication/didiyie_signup.dart';
+import 'package:didiyie/didiyie_page/didiyie_homepage/didiyie_homepage.dart';
+import 'package:didiyie/didiyie_gloableclass/didiyie_color.dart';
+import '../../didiyie_gloableclass/didiyie_fontstyle.dart';
+import '../../didiyie_gloableclass/didiyie_icons.dart';
+import './didiyie_login_animation.dart';
+
+class didiyieGetStarted extends StatefulWidget {
+  const didiyieGetStarted({Key? key}) : super(key: key);
+
+  @override
+  State<didiyieGetStarted> createState() => _didiyieGetStartedState();
+}
+
+class _didiyieGetStartedState extends State<didiyieGetStarted> {
+  dynamic size;
+  double height = 0.00;
+  double width = 0.00;
+
+  // Initialize auth controller
+  void _initAuthController() {
+    try {
+      Get.put(AuthController());
+    } catch (e) {
+      // Controller already initialized
+    }
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    _initAuthController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
+    
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+    
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              Colors.grey.shade50,
+              Colors.white.withOpacity(0.8),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width/20),
+              child: Column(
+                children: [
+                  // Top spacer
+                  SizedBox(height: height/25),
+                  
+                  // App logo with animation
+                  DelayedAnimation(
+                    delay: 200,
+                    offset: 0.5,
+                    child: Container(
+                      padding: EdgeInsets.all(width/30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: didiyieColor.appcolor.withOpacity(0.2),
+                            blurRadius: 25,
+                            spreadRadius: 5,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Hero(
+                        tag: 'logo',
+                        child: Image.asset(
+                          didiyiePngimage.appLogo,
+                          width: width * 0.22,
+                          height: width * 0.22,
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/30),
+                  
+                  // Title with animation
+                  DelayedAnimation(
+                    delay: 300,
+                    child: Text(
+                      "Welcome to Didi Yie",
+                      style: dmmedium.copyWith(
+                        fontSize: 30, 
+                        fontWeight: FontWeight.bold,
+                        color: didiyieColor.appcolor.withBlue((didiyieColor.appcolor.blue - 20).clamp(0, 255)),
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/70),
+                  
+                  // Subtitle with animation
+                  DelayedAnimation(
+                    delay: 400,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width/16),
+                      child: Text(
+                        "Discover Ghanaian cuisine and unlock nutritional insights",
+                        textAlign: TextAlign.center,
+                        style: mulishmedium.copyWith(
+                          fontSize: 16,
+                          height: 1.4,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/30),
+                  
+                  // Features list with animations
+                  DelayedAnimation(
+                    delay: 500,
+                    child: _buildFeatureItem(
+                      icon: Icons.camera_alt_rounded,
+                      title: "Scan & Identify",
+                      subtitle: "Identify local dishes instantly",
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/60),
+                  
+                  DelayedAnimation(
+                    delay: 600,
+                    child: _buildFeatureItem(
+                      icon: Icons.restaurant_menu_rounded,
+                      title: "Nutritional Analysis",
+                      subtitle: "Get nutrition info at a glance",
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/60),
+                  
+                  DelayedAnimation(
+                    delay: 700,
+                    child: _buildFeatureItem(
+                      icon: Icons.favorite_rounded,
+                      title: "Health Recommendations",
+                      subtitle: "Get personalized health insights",
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/25),
+                  
+                  // Sign Up button with animation
+                  DelayedAnimation(
+                    delay: 800,
+                    offset: 0.25,
+                    direction: Axis.horizontal,
+                    child: _buildButton(
+                      onTap: () {
+                        Get.to(() => const didiyieSignup(), transition: Transition.rightToLeft);
+                      },
+                      text: "Create Account",
+                      isPrimary: true,
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/45),
+                  
+                  // Log In button with animation
+                  DelayedAnimation(
+                    delay: 900,
+                    offset: 0.25,
+                    direction: Axis.horizontal,
+                    child: _buildButton(
+                      onTap: () {
+                        Get.to(() => const didiyieLogin(), transition: Transition.rightToLeft);
+                      },
+                      text: "Log In",
+                      isPrimary: false,
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/15),
+                  
+                  // Continue as Guest with animation
+                  DelayedAnimation(
+                    delay: 1000,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        Get.snackbar(
+                          'Welcome to Didi Yie!',
+                          'Continuing as guest - happy food discovery!',
+                          backgroundColor: didiyieColor.yellow.withOpacity(0.3),
+                          colorText: didiyieColor.appcolor,
+                          duration: const Duration(seconds: 2),
+                          borderRadius: 10,
+                          margin: const EdgeInsets.all(10),
+                        );
+                        Get.offAll(() => const didiyieHomePage());
+                      },
+                      child: Text(
+                        "Continue as Guest",
+                        style: mulishsemiBold.copyWith(
+                          fontSize: 16, 
+                          color: didiyieColor.appcolor,
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 1.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+                  SizedBox(height: height/30),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  
+  // Helper method to build feature item
+  Widget _buildFeatureItem({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.08),
+            blurRadius: 10,
+            spreadRadius: 0,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: didiyieColor.appcolor.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: didiyieColor.appcolor,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: mulishbold.copyWith(
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: mulishmedium.copyWith(
+                    fontSize: 13,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  // Helper method to build buttons
+  Widget _buildButton({
+    required VoidCallback onTap,
+    required String text,
+    required bool isPrimary,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        height: height / 15,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: isPrimary 
+            ? LinearGradient(
+                colors: [
+                  didiyieColor.appcolor,
+                  didiyieColor.appcolor.withBlue((didiyieColor.appcolor.blue + 30).clamp(0, 255)),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              )
+            : null,
+          color: isPrimary ? null : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: isPrimary 
+              ? null 
+              : Border.all(color: didiyieColor.appcolor.withOpacity(0.5), width: 1.5),
+          boxShadow: isPrimary
+              ? [
+                  BoxShadow(
+                    color: didiyieColor.appcolor.withOpacity(0.3),
+                    blurRadius: 12,
+                    spreadRadius: 0,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.05),
+                    blurRadius: 12,
+                    spreadRadius: 0,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: mulishbold.copyWith(
+                fontSize: 17,
+                color: isPrimary ? Colors.white : didiyieColor.appcolor,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Icon(
+              Icons.arrow_forward_rounded,
+              color: isPrimary ? Colors.white : didiyieColor.appcolor,
+              size: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,73 @@
+name: didiyie
+description: >
+  Didi Yie is an AI-driven grocery shopping assistant that helps users shop smarter, eat better, and live well. 
+  It learns preferences, recommends groceries, creates smart lists, offers meal suggestions, and celebrates Ghanaian culture.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  get: ^4.6.6 # State management, navigation, dependency injection
+  hive: ^2.2.3 # Lightweight local storage for offline support
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.5 # For accessing device paths
+  intl: ^0.20.2 # Internationalization and localization
+  http: ^1.2.1 # For API calls (e.g., real-time inventory)
+  provider: ^6.1.2 # For state management (optional, if not using GetX everywhere)
+  flutter_local_notifications: ^19.1.0 # For nudges and reminders
+  connectivity_plus: ^6.1.4 # Detect online/offline status
+  json_annotation: ^4.8.1 # For data models
+  shared_preferences: ^2.2.2
+  intl_phone_field: ^3.2.0
+  flutter_slidable: ^4.0.0
+  camera: ^0.10.5+9
+  
+  # Firebase
+  firebase_core: ^2.24.2 # Firebase Core
+  firebase_auth: ^4.15.3 # Firebase Authentication
+  cloud_firestore: ^4.13.6 # Firebase Firestore for storing user data
+  firebase_storage: ^11.5.6 # Firebase Storage for storing images
+  
+  # ML packages for food recognition
+  image: ^4.0.17 # For image processing
+  image_picker: ^1.0.7 # For capturing training images
+  # Note: TensorFlow Lite integration postponed for compatibility reasons
+  # Will implement in future after resolving compatibility issues
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/didiyie_assets/didiyie_pngimage/
+    - assets/images/
+    - assets/ml_models/
+
+  fonts:
+    - family: MulishBold
+      fonts:
+        - asset: assets/didiyie_assets/didiyie_fonts/Mulish-Bold.ttf
+    - family: MulishMedium
+      fonts:
+        - asset: assets/didiyie_assets/didiyie_fonts/Mulish-Medium.ttf
+    - family: MulishRegular
+      fonts:
+        - asset: assets/didiyie_assets/didiyie_fonts/Mulish-Regular.ttf
+    - family: MulishSemiBold
+      fonts:
+        - asset: assets/didiyie_assets/didiyie_fonts/Mulish-SemiBold.ttf
+
+# Additional notes:
+# - For Ghanaian localization, consider adding translation files under assets and using the intl package.
+# - For AI-driven features, you may need to connect to a backend or use on-device ML packages.
+# - Update asset paths and font families as you rebrand from StudySync to Didi Yie.
